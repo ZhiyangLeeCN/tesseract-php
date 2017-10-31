@@ -1,0 +1,6 @@
+local_settings:
+    build:
+        use_shared_libs: false
+dependencies:
+    pvt.cppan.demo.google.tesseract.libtesseract: master
+    pvt.cppan.demo.danbloomberg.leptonica: 1

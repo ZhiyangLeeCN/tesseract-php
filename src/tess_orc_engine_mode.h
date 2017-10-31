@@ -1,0 +1,6 @@
+#ifndef PHP_TESS_OCR_ENGINE_MODE_H
+#define PHP_TESS_OCR_ENGINE_MODE_H
+
+TESS_STARTUP_FUNCTION(tess_ocr_engine_mode);
+
+#endif // !PHP_TESS_OCR_ENGINE_MODE_H

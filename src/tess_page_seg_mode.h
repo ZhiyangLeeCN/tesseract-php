@@ -1,0 +1,6 @@
+#ifndef PHP_TESS_PAGE_SEG_MODEL_H
+#define PHP_TESS_PAGE_SEG_MODEL_H
+
+TESS_STARTUP_FUNCTION(tess_page_seg_mode);
+
+#endif // !PHP_TESS_PAGE_SEG_MODEL_H
