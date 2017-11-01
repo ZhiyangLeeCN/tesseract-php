@@ -35,9 +35,6 @@
 
 ZEND_DECLARE_MODULE_GLOBALS(tesseract_php)
 
-/* True global resources - no need for thread safety here */
-static int le_tesseract_php;
-
 /* {{{ PHP_INI
  */
 PHP_INI_BEGIN()
@@ -141,12 +138,10 @@ zend_module_entry tesseract_php_module_entry = {
 };
 /* }}} */
 
-#ifdef COMPILE_DL_TESSERACT_PHP
 #ifdef ZTS
 ZEND_TSRMLS_CACHE_DEFINE()
 #endif
 ZEND_GET_MODULE(tesseract_php)
-#endif
 
 /*
  * Local variables:

@@ -6,6 +6,8 @@ set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "CMake Targets")
 
 project(php_tesseract C CXX)
 
+set(CMAKE_BUILD_TYPE Debug)
+
 # Output directory settings
 set(output_dir ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${output_dir})
@@ -30,6 +32,16 @@ file(GLOB PHP_TESSERACT_SRC
 
 include_directories(src/)
 
+#set this can printf debug info
+if (DEFINED OUT_DEBUG_INFO)
+	add_definitions(-DZEND_DEBUG -DTESS_DEBUG)
+endif()
+
+#thread safe else not thread safe
+if (DEFINED PHP_TS)
+	add_definitions(-DZTS);
+endif()
+
 if (WIN32)
 
     if (NOT DEFINED PHP_SRC_DIR)
@@ -44,7 +56,7 @@ if (WIN32)
         message(FATAL_ERROR "ERROR:PHP_TARGET_LIB_NAME undefined.")
     endif()
 
-    add_definitions(-DZEND_WIN32 -DPHP_WIN32 -DZEND_DEBUG -DCOMPILE_DL_TESSERACT_PHP -DZEND_WIN32_KEEP_INLINE)
+    add_definitions(-DZEND_WIN32 -DPHP_WIN32 -DZEND_WIN32_KEEP_INLINE)
 
     link_directories(${PHP_LIB_DIR})
     include_directories(${PHP_SRC_DIR} ${PHP_SRC_DIR}/Zend ${PHP_SRC_DIR}/main ${PHP_SRC_DIR}/TSRM)
