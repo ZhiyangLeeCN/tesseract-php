@@ -128,7 +128,7 @@ PHP_METHOD(tess_base_api, GetUTF8Text)
 	tesseract::TessBaseAPI *tess_base_api = (tesseract::TessBaseAPI*)self->custom_data;
 
 	char *text = tess_base_api->GetUTF8Text();
-	zend_string *ret = zend_string_init(text, sizeof(text) -1, 0);
+	zend_string *ret = zend_string_init(text, strlen(text), 0);
 	delete[] text;
 
 	RETURN_STR(ret);
