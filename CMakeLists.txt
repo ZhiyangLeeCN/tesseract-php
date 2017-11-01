@@ -39,7 +39,7 @@ endif()
 
 #thread safe else not thread safe
 if (DEFINED PHP_TS)
-	add_definitions(-DZTS);
+	add_definitions(-DZTS)
 endif()
 
 if (WIN32)
