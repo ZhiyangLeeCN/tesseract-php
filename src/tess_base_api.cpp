@@ -117,7 +117,7 @@ PHP_METHOD(tess_base_api, SetImage)
 	custom_object *self = Z_CUSTOM_OBJ_P(Z_OBJ_P(getThis()));
 	tesseract::TessBaseAPI *tess_base_api = (tesseract::TessBaseAPI*)self->custom_data;
 	tess_base_api->SetImage(pix);
-	tess_base_api->Recognize(0);
+	//tess_base_api->Recognize(0);
 }
 /* }}} */
 
