@@ -71,4 +71,41 @@ if (WIN32)
 
 else()
 
+	if (DEFINED PHP_CONFIG_DIR)
+	  set(PHP_CONFIG_DIR "${PHP_CONFIG_DIR}/")
+	else()
+	  set(PHP_CONFIG_DIR "")
+	endif()
+
+	execute_process(COMMAND ${PHP_CONFIG_DIR}php-config --include-dir
+        OUTPUT_VARIABLE PHP_INCLUDE_DIR
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+
+	execute_process(COMMAND ${PHP_CONFIG_DIR}php-config --libs
+        OUTPUT_VARIABLE PHP_LIBS
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+	execute_process(COMMAND ${PHP_CONFIG_DIR}php-config --ldflags
+        OUTPUT_VARIABLE ${PHP_LDFLAGS}
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+
+	message("PHP_INCLUDE_DIR: ${PHP_INCLUDE_DIR}")
+
+	link_directories(${PHP_LDFLAGS})
+	include_directories(BEFORE ${PHP_INCLUDE_DIR} ${PHP_INCLUDE_DIR}/Zend ${PHP_INCLUDE_DIR}/main ${PHP_INCLUDE_DIR}/TSRM)
+
+	if (APPLE)
+		SET(CMAKE_SHARED_LINKER_FLAGS  "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
+		message(${CMAKE_SHARED_LINKER_FLAGS})
+	endif ()
+
+	add_library(php_tesseract SHARED ${PHP_TESSERACT_SRC} ${PHP_TESSERACT_HDR})
+
+    target_link_libraries(php_tesseract
+        pvt.cppan.demo.google.tesseract.libtesseract
+        pvt.cppan.demo.danbloomberg.leptonica
+    )
+
 endif()
