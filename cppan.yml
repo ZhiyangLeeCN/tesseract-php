@@ -1,6 +1,9 @@
 local_settings:
     build:
         use_shared_libs: false
+options:
+    any:
+        compile_options: "-march=native"
 dependencies:
     pvt.cppan.demo.google.tesseract.libtesseract: master
     pvt.cppan.demo.danbloomberg.leptonica: 1
