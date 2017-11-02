@@ -1,9 +1,9 @@
 local_settings:
     build:
         use_shared_libs: false
-options:
-    any:
-        compile_options: "-march=native"
+        #Intel CPU use options "-O3 -mtune=native -mavx", ARM CPU use options "-O3 -mfpu=neon -funsafe-math-optimizations"
+        #more information:https://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html 
+        compiler_flags: -O3 -mtune=native -mavx
 dependencies:
     pvt.cppan.demo.google.tesseract.libtesseract: master
     pvt.cppan.demo.danbloomberg.leptonica: 1
