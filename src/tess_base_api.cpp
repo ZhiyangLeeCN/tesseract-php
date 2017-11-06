@@ -33,6 +33,12 @@ ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_INFO_EX(arginfo_tess_base_api_getutf8text, 0, 0, 0)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_tess_base_api_clear, 0, 0, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_tess_base_api_end, 0, 0, 0)
+ZEND_END_ARG_INFO()
+
 /* {{{ public Tesseract\TesseractBaseApi::__construct(void)*/
 PHP_METHOD(tess_base_api, __construct)
 {
@@ -44,11 +50,17 @@ PHP_METHOD(tess_base_api, __construct)
 /* {{{ public Tesseract\TesseractBaseApi::__destruct(void) */
 PHP_METHOD(tess_base_api, __destruct)
 {
+	zval *this_val, *has_free;
 	custom_object *self = Z_CUSTOM_OBJ_P(Z_OBJ_P(getThis()));
+
+	this_val = getThis();
+	has_free = zend_read_property(tess_base_api_ce, this_val, ZEND_STRL("hasFree"), 1, NULL);
 	tesseract::TessBaseAPI *tess_base_api = (tesseract::TessBaseAPI*)self->custom_data;
-	tess_base_api->Clear();
-	tess_base_api->End();
-	delete tess_base_api;
+	if (EXPECTED(Z_TYPE_P(has_free) == IS_FALSE)) {
+		tess_base_api->Clear();
+		tess_base_api->End();
+		delete tess_base_api;
+	}
 	self->custom_data = NULL;
 }
 /* }}} */
@@ -136,6 +148,26 @@ PHP_METHOD(tess_base_api, GetUTF8Text)
 }
 /* }}} */
 
+/* {{{ public Tesseract\TesseractBaseApi::Clear */
+PHP_METHOD(tess_base_api, Clear)
+{
+	custom_object *self = Z_CUSTOM_OBJ_P(Z_OBJ_P(getThis()));
+	tesseract::TessBaseAPI *tess_base_api = (tesseract::TessBaseAPI *)self->custom_data;
+	tess_base_api->Clear();
+}
+/* }}} */
+
+/* {{{ public Tesseract\TesseractBaseApi::End */
+PHP_METHOD(tess_base_api, End)
+{
+	custom_object *self = Z_CUSTOM_OBJ_P(Z_OBJ_P(getThis()));
+	tesseract::TessBaseAPI *tess_base_api = (tesseract::TessBaseAPI *)self->custom_data;
+	tess_base_api->End();
+
+	zend_update_property_bool(tess_base_api_ce, getThis(), ZEND_STRL("hasFree"), 1);
+}
+/* }}} */
+
 static const zend_function_entry tess_base_api_methods[] =
 {
 	PHP_ME(tess_base_api, __construct,	     arginfo_tess_base_api_construct,		ZEND_ACC_PUBLIC | ZEND_ACC_CTOR)
@@ -145,6 +177,8 @@ static const zend_function_entry tess_base_api_methods[] =
 	PHP_ME(tess_base_api, SetVariable,       arginfo_tess_base_api_setvariable,		ZEND_ACC_PUBLIC)
 	PHP_ME(tess_base_api, SetImage,          arginfo_tess_base_api_setimage,		ZEND_ACC_PUBLIC)
 	PHP_ME(tess_base_api, GetUTF8Text,       arginfo_tess_base_api_getutf8text,		ZEND_ACC_PUBLIC)
+	PHP_ME(tess_base_api, Clear,             arginfo_tess_base_api_clear,		    ZEND_ACC_PUBLIC)
+	PHP_ME(tess_base_api, End,               arginfo_tess_base_api_end,		        ZEND_ACC_PUBLIC)
 	PHP_FE_END
 };
 
@@ -156,6 +190,8 @@ TESS_STARTUP_FUNCTION(tess_base_api)
 	tess_base_api_ce = zend_register_internal_class_ex(&ce, NULL);
 	tess_base_api_ce->ce_flags |= ZEND_ACC_FINAL;
 	tess_base_api_ce->create_object = custom_object_new;
+	
+	zend_declare_property_bool(tess_base_api_ce, ZEND_STRL("hasFree"), 0, ZEND_ACC_PRIVATE);
 
 	return SUCCESS;
 }
