@@ -25,14 +25,6 @@ if (DEFINED PHP_TS)
 	add_definitions(-DZTS)
 endif()
 
-#debug on or off
-option(ENABLE_DEBUG "enable debug" OFF)
-if(ENABLE_DEBUG)
-	add_definitions(-DZEND_DEBUG=1 -DTESS_DEBUG)
-else()
-	add_definitions(-DZEND_DEBUG=0)
-endif()
-
 #set(CPPAN_BUILD_SHARED_LIBS ON)
 add_subdirectory(.cppan)
 
@@ -47,6 +39,16 @@ file(GLOB PHP_TESSERACT_SRC
 include_directories(src/)
 
 if (WIN32)
+
+	#debug on or off
+	option(ENABLE_DEBUG "enable debug" OFF)
+	if(ENABLE_DEBUG)
+		message("debug:on")
+		add_definitions(-DZEND_DEBUG=1 -DTESS_DEBUG)
+	else()
+		message("debug:off")
+		add_definitions(-DZEND_DEBUG=0)
+	endif()
 
     if (NOT DEFINED PHP_SRC_DIR)
         message(FATAL_ERROR "ERROR:PHP_SRC_DIR undefined.")
