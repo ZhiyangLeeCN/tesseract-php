@@ -49,6 +49,7 @@ PHP_METHOD(tess_base_api, __destruct)
 	tess_base_api->Clear();
 	tess_base_api->End();
 	delete tess_base_api;
+	self->custom_data = NULL;
 }
 /* }}} */
 
