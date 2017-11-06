@@ -1,4 +1,5 @@
 .cppan
 build_x*
 *.dir
-x*
+x64
+Win32

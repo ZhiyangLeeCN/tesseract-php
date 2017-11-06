@@ -5,18 +5,32 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "CMake Targets")
 
 project(php_tesseract C CXX)
-
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Debug)  
 
 # Output directory settings
 set(output_dir ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${output_dir})
 
+#set compiler flags
 if (MSVC)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MP")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
+	add_definitions(-D__SSE4_1__)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP /arch:AVX")
 else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -mavx -msse4.1")
+endif()
+set(CPPAN_USE_CACHE 0)
+
+#thread safe else not thread safe
+if (DEFINED PHP_TS)
+	add_definitions(-DZTS)
+endif()
+
+#debug on or off
+option(ENABLE_DEBUG "enable debug" OFF)
+if(ENABLE_DEBUG)
+	add_definitions(-DZEND_DEBUG=1 -DTESS_DEBUG)
+else()
+	add_definitions(-DZEND_DEBUG=0)
 endif()
 
 #set(CPPAN_BUILD_SHARED_LIBS ON)
@@ -31,16 +45,6 @@ file(GLOB PHP_TESSERACT_SRC
 )
 
 include_directories(src/)
-
-#set this can printf debug info
-if (DEFINED OUT_DEBUG_INFO)
-	add_definitions(-DZEND_DEBUG -DTESS_DEBUG)
-endif()
-
-#thread safe else not thread safe
-if (DEFINED PHP_TS)
-	add_definitions(-DZTS)
-endif()
 
 if (WIN32)
 
