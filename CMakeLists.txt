@@ -21,7 +21,8 @@ endif()
 set(CPPAN_USE_CACHE 0)
 
 #thread safe else not thread safe
-if (DEFINED PHP_TS)
+option(PHP_TS "enable zend TS" OFF)
+if (PHP_TS)
 	add_definitions(-DZTS)
 endif()
 

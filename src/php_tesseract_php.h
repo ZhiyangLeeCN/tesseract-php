@@ -45,7 +45,7 @@ ZEND_END_MODULE_GLOBALS(tesseract_php)
 extern ZEND_DECLARE_MODULE_GLOBALS(tesseract_php);
 
 #ifdef ZTS
-#define TESSERACT_PHP_G(v) TSRMG(tesseract_globals_id, zend_tesseract_php_globals *, v)
+#define TESSERACT_PHP_G(v) TSRMG(tesseract_php_globals_id, zend_tesseract_php_globals *, v)
 #else
 #define TESSERACT_PHP_G(v) (tesseract_php_globals.v)
 #endif
