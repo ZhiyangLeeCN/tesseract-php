@@ -79,6 +79,10 @@ PHP_METHOD(tess_base_api, Init)
 	custom_object *self = Z_CUSTOM_OBJ_P(Z_OBJ_P(getThis()));
 	tesseract::TessBaseAPI *tess_base_api = (tesseract::TessBaseAPI*)self->custom_data;
 	int result = tess_base_api->Init(datapath->val, language->val, (tesseract::OcrEngineMode)oem);
+
+	zend_string_release(datapath);
+	zend_string_release(language);
+
 	RETURN_LONG(result);
 }
 /* }}} */
@@ -111,6 +115,10 @@ PHP_METHOD(tess_base_api, SetVariable)
 	custom_object *self = Z_CUSTOM_OBJ_P(Z_OBJ_P(getThis()));
 	tesseract::TessBaseAPI *tess_base_api = (tesseract::TessBaseAPI*)self->custom_data;
 	bool result = tess_base_api->SetVariable(name->val, value->val);
+
+	zend_string_release(name);
+	zend_string_release(value);
+
 	RETURN_BOOL(result);
 }
 /* }}} */
