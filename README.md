@@ -9,13 +9,19 @@ More details about tesseract-ocr can be found on their github project homepage.
 
 # Compilation guide for various platforms
 
+## Dependencies
+
+According to your platform to choose the corresponding version
+
+* [CMake](https://cmake.org/download/)
+* [Cppan client](https://cppan.org/client/)
+* A compiler for C and C++: GCC or Clang
+
 ## Linux
 
-1. [Download](https://cppan.org/client/) the latest CPPAN (C++ Archive Network `https://cppan.org/`) client from `https://cppan.org/client/`.
+1. Get latest tesseract-php source code to local.
 
-2. Get latest tesseract-php source code to local.
-
-3. Run
+2. Run
     ```
     cd tesseract-php
     cppan
@@ -23,19 +29,17 @@ More details about tesseract-ocr can be found on their github project homepage.
     cmake .. -DPHP_CONFIG_DIR=php-config where the path
     make
     ```
-4. Copy `libphp_tesseract.so` to php extensions directory and changed php.ini `extension=libphp_tesseract.so`.
+3. Copy `libphp_tesseract.so` to php extensions directory and changed php.ini `extension=libphp_tesseract.so`.
 
-5. Run `php -m` to check if tesseract-php is already installed
+4. Run `php -m` to check if tesseract-php is already installed
 
 ## Windows
 
 You have to build php-src first, php-src build in win32 system reference `http://wiki.php.net/internals/windows/stepbystepbuild`
 
-1. [Download](https://cppan.org/client/cppan-master-Windows-client.zip) the latest CPPAN (C++ Archive Network `https://cppan.org/`) client from `https://cppan.org/client/`.
+1. Get latest tesseract-php source code to local.
 
-2. Get latest tesseract-php source code to local.
-
-3. Run
+2. Run
     ```
     cd tesseract-php
     cppan
@@ -45,9 +49,9 @@ You have to build php-src first, php-src build in win32 system reference `http:/
     -DPHP_LIB_DIR=D:\Projet\php-7.1.10\x32\Debug 
     -DPHP_TARGET_LIB_NAME=php7_debug
     ```
-4. Open `php_tesseract.sln` in Visual Stuido
+3. Open `php_tesseract.sln` in Visual Stuido
 
-If your php-src build is not debug type, chang `-DENABLE_DEBUG=OFF` and `-DPHP_TARGET_LIB_NAME=php`. if you php-src build is TS(Thread safe)type, you must add `-DPHP-TS`.
+If your php-src build is not debug type, chang `-DENABLE_DEBUG=OFF` and `-DPHP_TARGET_LIB_NAME=php`. if you php-src build is TS(Thread safe) type, you must add `-DPHP-TS`.
 
 ## Building for x64 platform
 
@@ -66,4 +70,4 @@ The other steps are the same as building 32 bits, so here omitted.
     ```
 2. Open `php_tesseract.sln` in Visual Stuido
 
-If your php-src build is not debug type,chang `-DENABLE_DEBUG=OFF` and `-DPHP_TARGET_LIB_NAME=php`. if you php-src build is TS(Thread safe type),you must add `-DPHP-TS`.
+If your php-src build is not debug type,chang `-DENABLE_DEBUG=OFF` and `-DPHP_TARGET_LIB_NAME=php`. if you php-src build is TS(Thread safe) type,you must add `-DPHP-TS`.
