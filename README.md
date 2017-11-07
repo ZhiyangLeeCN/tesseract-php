@@ -29,7 +29,7 @@ More details about tesseract-ocr can be found on their github project homepage.
 
 ## Windows
 
-You have to build php-src first,php-src build in win32 system reference `http://wiki.php.net/internals/windows/stepbystepbuild`
+You have to build php-src first, php-src build in win32 system reference `http://wiki.php.net/internals/windows/stepbystepbuild`
 
 1. [Download](https://cppan.org/client/cppan-master-Windows-client.zip) the latest CPPAN (C++ Archive Network `https://cppan.org/`) client from `https://cppan.org/client/`.
 
@@ -40,11 +40,14 @@ You have to build php-src first,php-src build in win32 system reference `http://
     cd tesseract-php
     cppan
     mkdir build_x32 && cd build_x32
-    cmake .. -DENABLE_DEBUG=ON -DPHP_SRC_DIR=D:\Projet\php-7.1.10 -DPHP_LIB_DIR=D:\Projet\php-7.1.10\x32\Debug -DPHP_TARGET_LIB_NAME=php7_debug
+    cmake .. -DENABLE_DEBUG=ON 
+    -DPHP_SRC_DIR=D:\Projet\php-7.1.10 
+    -DPHP_LIB_DIR=D:\Projet\php-7.1.10\x32\Debug 
+    -DPHP_TARGET_LIB_NAME=php7_debug
     ```
 4. Open `php_tesseract.sln` in Visual Stuido
 
-If your php-src build is not debug type,chang `-DENABLE_DEBUG=OFF` and `-DPHP_TARGET_LIB_NAME=php`. if you php-src build is TS(Thread safe type),you must add `-DPHP-TS`.
+If your php-src build is not debug type, chang `-DENABLE_DEBUG=OFF` and `-DPHP_TARGET_LIB_NAME=php`. if you php-src build is TS(Thread safe)type, you must add `-DPHP-TS`.
 
 ## Building for x64 platform
 
@@ -55,7 +58,11 @@ The other steps are the same as building 32 bits, so here omitted.
     cd tesseract-php
     cppan
     mkdir build_x64 && cd build_x64
-    cmake .. -DENABLE_DEBUG=ON -DPHP_SRC_DIR=D:\Projet\php-7.1.10 -DPHP_LIB_DIR=D:\Projet\php-7.1.10\x32\Debug -DPHP_TARGET_LIB_NAME=php7_debug -G "Visual Studio 15 2017 Win64"
+    cmake .. -DENABLE_DEBUG=ON 
+    -DPHP_SRC_DIR=D:\Projet\php-7.1.10 
+    -DPHP_LIB_DIR=D:\Projet\php-7.1.10\x32\Debug 
+    -DPHP_TARGET_LIB_NAME=php7_debug 
+    -G "Visual Studio 15 2017 Win64"
     ```
 2. Open `php_tesseract.sln` in Visual Stuido
 
