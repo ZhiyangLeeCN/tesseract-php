@@ -51,6 +51,5 @@ PHP_FUNCTION(tessPixDestroy)
 		return;
 	}
 
-	zend_resource *res = Z_RES_P(val);
-	pix_res_dtor(res);
+	zend_list_close(Z_RES_P(val));
 }
