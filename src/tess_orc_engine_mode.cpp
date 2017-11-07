@@ -16,17 +16,17 @@ TESS_STARTUP_FUNCTION(tess_ocr_engine_mode)
 	tess_ocr_engine_mode_ce->ce_flags |= ZEND_ACC_FINAL;
 
 	zend_declare_class_constant_long(tess_ocr_engine_mode_ce,
-		"OEM_TESSERACT_ONLY", sizeof("OEM_TESSERACT_ONLY") - 1, OcrEngineMode::OEM_TESSERACT_ONLY);
+		ZEND_STRL("OEM_TESSERACT_ONLY"), OcrEngineMode::OEM_TESSERACT_ONLY);
 	zend_declare_class_constant_long(tess_ocr_engine_mode_ce,
-		"OEM_LSTM_ONLY", sizeof("OEM_LSTM_ONLY") - 1, OcrEngineMode::OEM_LSTM_ONLY);
+		ZEND_STRL("OEM_LSTM_ONLY"), OcrEngineMode::OEM_LSTM_ONLY);
 	zend_declare_class_constant_long(tess_ocr_engine_mode_ce,
-		"OEM_TESSERACT_LSTM_COMBINED", sizeof("OEM_TESSERACT_LSTM_COMBINED") - 1, OcrEngineMode::OEM_TESSERACT_LSTM_COMBINED);
+		ZEND_STRL("OEM_TESSERACT_LSTM_COMBINED"), OcrEngineMode::OEM_TESSERACT_LSTM_COMBINED);
 	zend_declare_class_constant_long(tess_ocr_engine_mode_ce,
-		"OEM_DEFAULT", sizeof("OEM_DEFAULT") - 1, OcrEngineMode::OEM_DEFAULT);
+		ZEND_STRL("OEM_DEFAULT"), OcrEngineMode::OEM_DEFAULT);
 	zend_declare_class_constant_long(tess_ocr_engine_mode_ce,
-		"OEM_CUBE_ONLY", sizeof("OEM_CUBE_ONLY") - 1, OcrEngineMode::OEM_CUBE_ONLY);
+		ZEND_STRL("OEM_CUBE_ONLY"), OcrEngineMode::OEM_CUBE_ONLY);
 	zend_declare_class_constant_long(tess_ocr_engine_mode_ce,
-		"OEM_TESSERACT_CUBE_COMBINED", sizeof("OEM_TESSERACT_CUBE_COMBINED") - 1, OcrEngineMode::OEM_TESSERACT_CUBE_COMBINED);
+		ZEND_STRL("OEM_TESSERACT_CUBE_COMBINED"), OcrEngineMode::OEM_TESSERACT_CUBE_COMBINED);
 
 	return SUCCESS;
 }
