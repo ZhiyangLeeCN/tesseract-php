@@ -1,5 +1,9 @@
+.vscode
 .cppan
 build_x*
+build
 *.dir
 x64
+x32
 Win32
+Win64
