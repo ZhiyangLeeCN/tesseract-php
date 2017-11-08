@@ -9,6 +9,10 @@ More details about tesseract-ocr can be found on their github project homepage.
 
 # Compilation guide for various platforms
 
+## Requirement
+
+* PHP7+
+
 ## Dependencies
 
 According to your platform to choose the corresponding version
@@ -51,7 +55,7 @@ You have to build php-src first, php-src build in win32 system reference `http:/
     ```
 3. Open `php_tesseract.sln` in Visual Stuido
 
-If your php-src build is not debug type, chang `-DENABLE_DEBUG=OFF` and `-DPHP_TARGET_LIB_NAME=php`. if you php-src build is TS(Thread safe) type, you must add `-DPHP-TS`.
+If your php-src build is not debug type, chang `-DENABLE_DEBUG=OFF` and `-DPHP_TARGET_LIB_NAME=php(depending on the lib file name generated after build php-src)`. if you php-src build is TS(Thread safe) type, you must add `-DPHP-TS=ON`.
 
 ## Building for x64 platform
 
@@ -70,4 +74,4 @@ The other steps are the same as building 32 bits, so here omitted.
     ```
 2. Open `php_tesseract.sln` in Visual Stuido
 
-If your php-src build is not debug type,chang `-DENABLE_DEBUG=OFF` and `-DPHP_TARGET_LIB_NAME=php`. if you php-src build is TS(Thread safe) type,you must add `-DPHP-TS`.
+If your php-src build is not debug type,chang `-DENABLE_DEBUG=OFF` and `-DPHP_TARGET_LIB_NAME=php(depending on the lib file name generated after build php-src)`. if you php-src build is TS(Thread safe) type,you must add `-DPHP-TS=ON`.
