@@ -50,10 +50,6 @@ extern ZEND_DECLARE_MODULE_GLOBALS(tesseract_php);
 #define TESSERACT_PHP_G(v) (tesseract_php_globals.v)
 #endif
 
-#if defined(ZTS) && defined(COMPILE_DL_TESSERACT_PHP)
-ZEND_TSRMLS_CACHE_EXTERN()
-#endif
-
 #define TESS_STARTUP_FUNCTION(module)   	ZEND_MINIT_FUNCTION(tess_##module)
 #define TESS_RINIT_FUNCTION(module)		ZEND_RINIT_FUNCTION(tess_##module)
 #define TESS_STARTUP(module)	 		  	ZEND_MODULE_STARTUP_N(tess_##module)(INIT_FUNC_ARGS_PASSTHRU)

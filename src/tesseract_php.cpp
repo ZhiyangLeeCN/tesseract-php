@@ -82,9 +82,6 @@ PHP_MSHUTDOWN_FUNCTION(tesseract_php)
  */
 PHP_RINIT_FUNCTION(tesseract_php)
 {
-#if defined(COMPILE_DL_TESSERACT_PHP) && defined(ZTS)
-	ZEND_TSRMLS_CACHE_UPDATE();
-#endif
 	return SUCCESS;
 }
 /* }}} */
@@ -134,13 +131,14 @@ zend_module_entry tesseract_php_module_entry = {
 	PHP_RSHUTDOWN(tesseract_php),	/* Replace with NULL if there's nothing to do at request end */
 	PHP_MINFO(tesseract_php),
 	PHP_TESSERACT_PHP_VERSION,
-	STANDARD_MODULE_PROPERTIES
+	PHP_MODULE_GLOBALS(tesseract_php),
+	PHP_GINIT(tesseract_php),
+	NULL,
+	NULL,
+	STANDARD_MODULE_PROPERTIES_EX
 };
 /* }}} */
 
-#ifdef ZTS
-ZEND_TSRMLS_CACHE_DEFINE()
-#endif
 ZEND_GET_MODULE(tesseract_php)
 
 /*
